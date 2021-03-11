@@ -37,26 +37,18 @@ public class CharacterController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 5, 0);
         }
+    }
 
-
-        /*if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.A) ...)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
         {
-            rb2.velocity = new Vector2(-1f, rb2.velocity.y);
+            Destroy(gameObject);
         }
+    }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb2.velocity = new Vector2(1f, rb2.velocity.y);
-        }*/
-
-        /*if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            rb2.velocity = new Vector2(rb2.velocity.x, 1f);
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rb2.velocity = new Vector2(rb2.velocity.x, -1f);
-        }*/
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("I have entered a trigger");
     }
 }
