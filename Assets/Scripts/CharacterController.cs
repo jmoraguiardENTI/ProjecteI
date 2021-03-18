@@ -6,19 +6,34 @@ public class CharacterController : MonoBehaviour
 {
     public float velocity = 0f;
 
+    private Rigidbody2D rb2 = null;
+
+    private Animator animator = null;
+
+    private SpriteRenderer renderer = null;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb2 = GetComponent<Rigidbody2D>();
+
+        animator = GetComponent<Animator>();
+
+        renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D rb2 = GetComponent<Rigidbody2D>();
-
         rb2.velocity = new Vector2(Input.GetAxis("Horizontal") * velocity, rb2.velocity.y);
-        rb2.velocity = new Vector2(rb2.velocity.x, Input.GetAxis("Vertical") * velocity);
+        //rb2.velocity = new Vector2(rb2.velocity.x, Input.GetAxis("Vertical") * velocity);
+
+        animator.SetFloat("Velocity", Mathf.Abs(rb2.velocity.x));
+
+        if (rb2.velocity.x < 0)
+        {
+            renderer.flipX = true;
+        }
 
         // Teleport the game object
         if (transform.position.x > 9)
